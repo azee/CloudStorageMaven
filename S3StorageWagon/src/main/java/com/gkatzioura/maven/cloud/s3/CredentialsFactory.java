@@ -18,12 +18,15 @@ package com.gkatzioura.maven.cloud.s3;
 
 import java.util.logging.Logger;
 
+import com.amazonaws.auth.BasicSessionCredentials;
 import org.apache.maven.wagon.authentication.AuthenticationInfo;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
+
+import static org.apache.http.util.TextUtils.isEmpty;
 
 public class CredentialsFactory {
 
@@ -42,6 +45,17 @@ public class CredentialsFactory {
      *         {@code authenticationInfo}
      */
     public AWSCredentialsProvider create(AuthenticationInfo authenticationInfo) {
+        if (
+                !isEmpty(System.getenv("AWS_ACCESS_KEY_ID"))
+                        && !isEmpty(System.getenv("AWS_SECRET_ACCESS_KEY"))
+                        && !isEmpty(System.getenv("AWS_SESSION_TOKEN"))
+        ){
+            return  new AWSStaticCredentialsProvider(new BasicSessionCredentials(
+                    System.getenv("AWS_ACCESS_KEY_ID"),
+                    System.getenv("AWS_SECRET_ACCESS_KEY"),
+                    System.getenv("AWS_SESSION_TOKEN"))
+            );
+        }
         if(authenticationInfo==null) {
             return new DefaultAWSCredentialsProviderChain();
         } else {
