@@ -50,7 +50,7 @@ public class S3StorageWagon extends AbstractStorageWagon {
     private S3StorageRepository s3StorageRepository;
     private final KeyResolver keyResolver = new KeyResolver();
 
-    private String region;
+    private String region = System.getenv("AWS_REGION");
     private Boolean publicRepository;
 
     private static final Logger LOGGER = Logger.getLogger(S3StorageWagon.class.getName());
