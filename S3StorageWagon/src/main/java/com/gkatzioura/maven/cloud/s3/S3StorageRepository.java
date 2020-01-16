@@ -102,7 +102,7 @@ public class S3StorageRepository {
             destination.getParentFile().mkdirs();//make sure the folder exists or the outputStream will fail.
             try(OutputStream outputStream = new TransferProgressFileOutputStream(destination,transferProgress);
                 InputStream inputStream = s3Object.getObjectContent()) {
-                IOUtils.copy(inputStream,outputStream);
+                IOUtils.copyLarge(inputStream,outputStream, 0, s3Object.getObjectMetadata().getContentLength());
             }
         } catch (AmazonS3Exception |IOException e) {
             LOGGER.log(Level.SEVERE,"Could not transfer file", e);
