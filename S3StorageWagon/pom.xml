@@ -9,7 +9,7 @@
 
     <groupId>com.testquack.smith</groupId>
     <artifactId>s3-storage-wagon-assume-role</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
     <description>S3 storage wagon</description>
 
