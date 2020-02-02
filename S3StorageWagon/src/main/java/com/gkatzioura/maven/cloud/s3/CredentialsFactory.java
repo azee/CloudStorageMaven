@@ -50,6 +50,9 @@ public class CredentialsFactory {
                         && !isEmpty(System.getenv("AWS_SECRET_ACCESS_KEY"))
                         && !isEmpty(System.getenv("AWS_SESSION_TOKEN"))
         ){
+            LOGGER.info("////////// Getting token " + System.getenv("AWS_SESSION_TOKEN"));
+
+
             return  new AWSStaticCredentialsProvider(new BasicSessionCredentials(
                     System.getenv("AWS_ACCESS_KEY_ID"),
                     System.getenv("AWS_SECRET_ACCESS_KEY"),
