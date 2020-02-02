@@ -29,9 +29,9 @@
     </developers>
 
     <scm>
-        <url>https://github.com/gkatzioura/CloudStorage</url>
-        <connection>scm:git:https://github.com/gkatzioura/CloudStorage.git</connection>
-        <developerConnection>scm:git:https://github.com/gkatzioura/CloudStorage.git</developerConnection>
+        <url>https://github.com/azee/CloudStorage</url>
+        <connection>scm:git:https://github.com/azee/CloudStorage.git</connection>
+        <developerConnection>scm:git:https://github.com/azee/CloudStorage.git</developerConnection>
       <tag>HEAD</tag>
   </scm>
 
