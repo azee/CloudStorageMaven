@@ -1,15 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>9</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.gkatzioura.maven.cloud</groupId>
-    <artifactId>cloud-storage-maven</artifactId>
-    <packaging>pom</packaging>
-    <version>2.3</version>
-  
-    <name>Cloud Storage</name>
-    <description>The CloudStorage project enables you to use the storage options of cloud provides (Google Cloud) storage as maven repositories.</description>
-    <url>https://github.com/gkatzioura/CloudStorage</url>
+    <groupId>com.testquack.smith</groupId>
+    <artifactId>s3-storage-wagon</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>maven-plugin</packaging>
+    <description>S3 storage wagon</description>
+
+    <properties>
+        <aws.version>1.11.595</aws.version>
+        <httpcore>4.4.10</httpcore>
+        <powermock.version>1.7.1</powermock.version>
+        <wagon.version>3.0.0</wagon.version>
+        <logback.version>1.2.3</logback.version>
+        <commons-io.version>2.6</commons-io.version>
+        <junit.version>4.12</junit.version>
+        <maven.plugin.api.version>3.0</maven.plugin.api.version>
+        <maven.plugin.annotations.version>3.4</maven.plugin.annotations.version>
+        <maven.compiler>1.8</maven.compiler>
+    </properties>
+
+    <scm>
+        <url>scm:git:git@github.com:azee/CloudStorageMaven.git</url>
+        <connection>scm:git:git@github.com:azee/CloudStorageMaven</connection>
+        <developerConnection>scm:git:git@github.com:azee/CloudStorageMaven.git</developerConnection>
+    </scm>
 
     <licenses>
         <license>
@@ -18,75 +40,128 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
-    <developers>
-        <developer>
-            <name>Emmanouil Gkatziouras</name>
-            <email>emmanouil@gmail.com</email>
-            <organization>egkatzioura</organization>
-            <organizationUrl>https://egkatzioura.com/</organizationUrl>
-        </developer>
-    </developers>
-
-    <scm>
-        <url>https://github.com/azee/CloudStorageMaven</url>
-        <connection>scm:git:https://github.com/azee/CloudStorageMaven.git</connection>
-        <developerConnection>scm:git:https://github.com/azee/CloudStorageMaven.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
-
-    <properties>
-        <wagon.version>3.0.0</wagon.version>
-        <logback.version>1.2.3</logback.version>
-        <commons-io.version>2.6</commons-io.version>
-        <junit.version>4.12</junit.version>
-        <maven.plugin.api.version>3.0</maven.plugin.api.version>
-        <maven.plugin.annotations.version>3.4</maven.plugin.annotations.version>
-    </properties>
-
-    <distributionManagement>
-        <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>http://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>sonatype-nexus-staging</id>
-            <name>Nexus Release Repository</name>
-            <url>http://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-        <downloadUrl>https://oss.sonatype.org/content/groups/public/org/knowm/xchart</downloadUrl>
-    </distributionManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.maven.wagon</groupId>
+            <artifactId>wagon-provider-api</artifactId>
+            <version>${wagon.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>${maven.plugin.api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-s3</artifactId>
+            <version>${aws.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-sts</artifactId>
+            <version>${aws.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gkatzioura.maven.cloud</groupId>
+            <artifactId>cloud-storage-core</artifactId>
+            <version>2.3</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>${maven.plugin.annotations.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>${httpcore}</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-module-junit4</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.powermock</groupId>
+            <artifactId>powermock-api-mockito2</artifactId>
+            <version>${powermock.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.wagon</groupId>
+            <artifactId>wagon-provider-test</artifactId>
+            <version>${wagon.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <artifactId>maven-plugin-plugin</artifactId>
+                <version>3.3</version>
+                <executions>
+                    <execution>
+                        <id>default-descriptor</id>
+                        <phase>process-classes</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <source>${maven.compiler}</source>
+                    <target>${maven.compiler}</target>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>jar</goal>
                         </goals>
@@ -97,6 +172,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
                 <version>1.6</version>
+                <configuration>
+                    <passphrase>${gpg.passphrase}</passphrase>
+                    <gpgArguments>
+                        <arg>--pinentry-mode</arg>
+                        <arg>loopback</arg>
+                    </gpgArguments>
+                </configuration>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -107,24 +189,8 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-release-plugin</artifactId>
-                <version>2.4.2</version>
-                <configuration>
-                    <tagNameFormat>@{project.version}</tagNameFormat>
-                    <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <releaseProfiles>releases</releaseProfiles>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 
-    <modules>
-        <module>GoogleStorageWagon</module>
-        <module>CloudStorageCore</module>
-        <module>AzureStorageWagon</module>
-        <module>S3StorageWagon</module>
-    </modules>
 
 </project>
