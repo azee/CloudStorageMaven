@@ -2,6 +2,7 @@ package com.gkatzioura.maven.cloud.s3;
 
 import com.amazonaws.regions.AwsEnvVarOverrideRegionProvider;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
@@ -12,6 +13,7 @@ import static com.amazonaws.SDKGlobalConfiguration.AWS_REGION_SYSTEM_PROPERTY;
 import static org.powermock.api.mockito.PowerMockito.*;
 
 @RunWith(PowerMockRunner.class)
+@Ignore
 public class S3StorageRegionProviderChainTest {
 
     private final static String PROVIDED_REGION = "provided-region";

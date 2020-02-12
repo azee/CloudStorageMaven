@@ -9,6 +9,7 @@ import org.apache.maven.wagon.WagonTestCase;
 import org.apache.maven.wagon.authentication.AuthenticationInfo;
 import org.apache.maven.wagon.repository.Repository;
 import org.apache.maven.wagon.resource.Resource;
+import org.junit.Ignore;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -16,6 +17,7 @@ import java.util.Iterator;
 /***
  * this class will launch 14 unit test from the apache wagon provider tester
  * */
+@Ignore
 public class S3StorageWagonTest extends WagonTestCase {
 
     AmazonS3 amazonS3;
