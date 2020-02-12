@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.gkatzioura.maven.cloud</groupId>
+    <groupId>com.testquack.smith</groupId>
     <artifactId>cloud-storage-maven</artifactId>
     <packaging>pom</packaging>
-    <version>2.3</version>
+    <version>1.0</version>
   
     <name>Cloud Storage</name>
     <description>The CloudStorage project enables you to use the storage options of cloud provides (Google Cloud) storage as maven repositories.</description>
@@ -29,9 +29,9 @@
     </developers>
 
     <scm>
-        <url>https://github.com/azee/CloudStorage</url>
-        <connection>scm:git:https://github.com/azee/CloudStorage.git</connection>
-        <developerConnection>scm:git:https://github.com/azee/CloudStorage.git</developerConnection>
+        <url>https://github.com/azee/CloudStorageMaven</url>
+        <connection>scm:git:https://github.com/azee/CloudStorageMaven.git</connection>
+        <developerConnection>scm:git:https://github.com/azee/CloudStorageMaven.git</developerConnection>
       <tag>HEAD</tag>
   </scm>
 
