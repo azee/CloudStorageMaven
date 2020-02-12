@@ -28,7 +28,7 @@
     </properties>
 
     <scm>
-        <url>scm:git:git@github.com::azee/CloudStorageMaven.git</url>
+        <url>scm:git:git@github.com:azee/CloudStorageMaven.git</url>
         <connection>scm:git:https://github.com/azee/CloudStorageMaven</connection>
         <developerConnection>scm:git:https://github.com/azee/CloudStorageMaven.git</developerConnection>
     </scm>
